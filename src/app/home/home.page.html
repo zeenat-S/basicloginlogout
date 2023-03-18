@@ -1,0 +1,79 @@
+<ion-menu contentId="main-content">
+  <ion-header>
+
+    <ion-toolbar>
+      <div style="display: flex; justify-content: space-around; align-items: center;">
+        {{user}}
+        <div>
+          <ion-avatar style="font-size: small;">
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+        </div>
+      </div>
+    </ion-toolbar>
+
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-button style="float: right;" (click)="logout()">Logout</ion-button>
+  </ion-content>
+</ion-menu>
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="end">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>UOME</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+
+  <ion-content class="ion-padding">
+    <!-- add expense -->
+    <ion-card>
+      <ion-card-content>
+        <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
+          <ion-item>
+            <ion-label>
+              Description
+            </ion-label>
+            <ion-input type="text" formControlName="description"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="expenseForm.get('description')?.invalid && expenseForm.get('description')?.touched">
+            <ion-text color="danger">Description is required</ion-text>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>
+              Amount
+            </ion-label>
+            <ion-input type="number" step=".01" formControlName="amount"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="expenseForm.get('amount')?.invalid && expenseForm.get('amount')?.touched">
+            <ion-text color="danger">Amount is required and should be greater than 0.</ion-text>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Date</ion-label>
+            <ion-datetime formControlName="date" display-format="MMM DD, YYYY" picker-format="MMM DD YYYY"></ion-datetime>
+          </ion-item>
+          <ion-item *ngIf="expenseForm.get('date')?.invalid && expenseForm.get('date')?.touched">
+            <ion-text color="danger">Date is required.</ion-text>
+          </ion-item>
+
+          <ion-row>
+            <ion-col>
+              <ion-button type="submit" expand="block">Add Expense</ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button color="medium" expand="block" (click)="onCancel()" >Cancel</ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- add group -->
+  </ion-content>
+</div>

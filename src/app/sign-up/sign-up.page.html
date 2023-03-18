@@ -1,0 +1,32 @@
+<ion-content class="content">
+  <div style="margin: 40px; margin-top: 250px;">
+    <form style="padding: 10px; padding-bottom: 50px; background-color: white; border-radius: 20px;"
+      [formGroup]="signUpForm">
+      <h2 style="text-align: center; margin-bottom: 10px;">Sign Up</h2>
+      <ion-item>
+        <ion-label position="floating">Name</ion-label>
+        <ion-input type="text" placeholder="Enter Name" formControlName="name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" placeholder="Enter Email" formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" placeholder="Enter Password" formControlName="password"></ion-input>
+      </ion-item>
+      <!-- <div>
+        <div *ngIf="!loggedIn" style="color: red; text-align: center;" [innerHTML]="alertHTML"></div>
+        <div *ngIf="loggedIn" style="color: green; text-align: center;" [innerHTML]="alertHTML"></div>
+      </div> -->
+
+      <div style="display:flex; justify-content: center;">
+        <ion-button style="margin-top:20px;" (click)="signUp()" [disabled]="!signUpForm.valid">Sign Up</ion-button>
+      </div>
+      <div style="text-align: center;">
+        <p>Already have an account? <a href="/login">Log In</a></p>
+      </div>
+    </form>
+  </div>
+
+</ion-content>

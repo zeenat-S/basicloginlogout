@@ -1,0 +1,7 @@
+{
+  "name": "basicloginlogout",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
