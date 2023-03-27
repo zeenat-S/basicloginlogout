@@ -26,7 +26,7 @@ export class HomePage {
     date: new FormControl('', [Validators.required])
   })
 
-  expenses !: any[];
+  expenses : Expense[]=[];
 
   constructor(private auth: AuthenticationService,
     private fb: FormBuilder,
@@ -66,7 +66,7 @@ export class HomePage {
 
   async onSubmit() {
     const expense: Expense = {
-      id: '',
+      id: String(this.expenses.length),
       description: String(this.expenseForm.value.description),
       amount: Number(this.expenseForm.value.amount),
       date: new Date(String(this.expenseForm.value.date)),
@@ -85,7 +85,8 @@ export class HomePage {
       const expRef = this.firestore.collection('users').doc(docId).collection('expense');
       expRef.add(expense).then(() => console.log("expense added : " + expense.description))
     }))
-
+    this.showExpenseForm = false;
+    this.expenseForm.reset();
   }
 
   onCancel() {
@@ -97,7 +98,7 @@ export class HomePage {
     this.showExpenseForm = true;
   }
 
-  deleteExpense(date: Date) {
+  deleteExpense(id: string | undefined) {
     this.auth.getCurrentUserEmail().then((async email => {
       const query = await this.firestore.collection('users', ref => ref.where('userEmail', '==', email)).get().toPromise();
       if (query?.empty) {
@@ -106,7 +107,7 @@ export class HomePage {
       }
       const document = query?.docs[0];
       const docId = document?.id;
-      const expRef = this.firestore.collection('users').doc(docId).collection('expense', ref=> ref.where('date', '==', date));
+      const expRef = this.firestore.collection('users').doc(docId).collection('expense', ref=> ref.where('id', '==', id));
       expRef.get().toPromise().then(queryS=>{
         queryS?.forEach(doc=> {
           const exp = expRef.doc(doc.id);

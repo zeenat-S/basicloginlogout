@@ -60,7 +60,7 @@ export class AuthenticationService {
   logout() {
     return this.af.signOut().then(
       () => {
-        console.log(this.getCurrentUser() + "logged out")
+        console.log("logged out")
         this.router.navigate(['/login'])
       }
     )

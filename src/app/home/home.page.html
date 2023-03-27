@@ -32,22 +32,15 @@
   <ion-content class="ion-padding">
     <!-- add expense -->
     <div *ngIf="!showExpenseForm" style="display: flex; justify-content: center;">
-      <!-- <ion-fab>
-        <ion-fab-button (click)="HandleAddButton()">
-          <ion-icon name="add"></ion-icon>
-        </ion-fab-button>
-      </ion-fab> -->
       <ion-button (click)="HandleAddButton()" shape="round">Add New Expense</ion-button>
     </div>
-    <div *ngIf="expenses.length===0" style="text-align: center; margin-top: 60px;">
-      You have no recent expenses. Add expenses.
-    </div>
+    
     <div *ngIf="showExpenseForm">
       <ion-card>
         <ion-card-content>
           <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
             <ion-item>
-              <ion-label>
+              <ion-label position="floating">
                 Description
               </ion-label>
               <ion-input type="text" formControlName="description"></ion-input>
@@ -57,7 +50,7 @@
             </ion-item>
 
             <ion-item>
-              <ion-label>
+              <ion-label position="floating">
                 Amount
               </ion-label>
               <ion-input type="number" step=".01" formControlName="amount"></ion-input>
@@ -77,7 +70,7 @@
 
             <ion-row>
               <ion-col>
-                <ion-button type="submit" expand="block">Add Expense</ion-button>
+                <ion-button type="submit" expand="block" [disabled]="!expenseForm.valid">Add Expense</ion-button>
               </ion-col>
               <ion-col>
                 <ion-button color="medium" expand="block" (click)="onCancel()">Cancel</ion-button>
@@ -97,7 +90,7 @@
                 <ion-card-title>
                   {{ exp.amount }}
                   <span style="float: right;">
-                    <ion-button color=danger (click)="deleteExpense(exp.date)"><ion-icon name="trash-outline"></ion-icon></ion-button>
+                    <ion-button color=danger (click)="deleteExpense(exp.id)"><ion-icon name="trash-outline"></ion-icon></ion-button>
                   </span>
                 </ion-card-title>
                 <ion-card-subtitle>
