@@ -23,7 +23,7 @@
       <ion-buttons slot="end">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title>UOME</ion-title>
+      <ion-title>{{user}}'S DAILY EXPENSES</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -31,49 +31,82 @@
 
   <ion-content class="ion-padding">
     <!-- add expense -->
-    <ion-card>
-      <ion-card-content>
-        <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
-          <ion-item>
-            <ion-label>
-              Description
-            </ion-label>
-            <ion-input type="text" formControlName="description"></ion-input>
-          </ion-item>
-          <ion-item *ngIf="expenseForm.get('description')?.invalid && expenseForm.get('description')?.touched">
-            <ion-text color="danger">Description is required</ion-text>
-          </ion-item>
+    <div *ngIf="!showExpenseForm" style="display: flex; justify-content: center;">
+      <!-- <ion-fab>
+        <ion-fab-button (click)="HandleAddButton()">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab> -->
+      <ion-button (click)="HandleAddButton()" shape="round">Add New Expense</ion-button>
+    </div>
+    <div *ngIf="expenses.length===0" style="text-align: center; margin-top: 60px;">
+      You have no recent expenses. Add expenses.
+    </div>
+    <div *ngIf="showExpenseForm">
+      <ion-card>
+        <ion-card-content>
+          <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
+            <ion-item>
+              <ion-label>
+                Description
+              </ion-label>
+              <ion-input type="text" formControlName="description"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="expenseForm.get('description')?.invalid && expenseForm.get('description')?.touched">
+              <ion-text color="danger">Description is required</ion-text>
+            </ion-item>
 
-          <ion-item>
-            <ion-label>
-              Amount
-            </ion-label>
-            <ion-input type="number" step=".01" formControlName="amount"></ion-input>
-          </ion-item>
-          <ion-item *ngIf="expenseForm.get('amount')?.invalid && expenseForm.get('amount')?.touched">
-            <ion-text color="danger">Amount is required and should be greater than 0.</ion-text>
-          </ion-item>
+            <ion-item>
+              <ion-label>
+                Amount
+              </ion-label>
+              <ion-input type="number" step=".01" formControlName="amount"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="expenseForm.get('amount')?.invalid && expenseForm.get('amount')?.touched">
+              <ion-text color="danger">Amount is required and should be greater than 0.</ion-text>
+            </ion-item>
 
-          <ion-item>
-            <ion-label>Date</ion-label>
-            <ion-datetime formControlName="date" display-format="MMM DD, YYYY" picker-format="MMM DD YYYY"></ion-datetime>
-          </ion-item>
-          <ion-item *ngIf="expenseForm.get('date')?.invalid && expenseForm.get('date')?.touched">
-            <ion-text color="danger">Date is required.</ion-text>
-          </ion-item>
+            <ion-item>
+              <ion-label>Date</ion-label>
+              <ion-datetime formControlName="date" display-format="MMM DD, YYYY"
+                picker-format="MMM DD YYYY"></ion-datetime>
+            </ion-item>
+            <ion-item *ngIf="expenseForm.get('date')?.invalid && expenseForm.get('date')?.touched">
+              <ion-text color="danger">Date is required.</ion-text>
+            </ion-item>
 
-          <ion-row>
-            <ion-col>
-              <ion-button type="submit" expand="block">Add Expense</ion-button>
-            </ion-col>
-            <ion-col>
-              <ion-button color="medium" expand="block" (click)="onCancel()" >Cancel</ion-button>
-            </ion-col>
-          </ion-row>
-        </form>
-      </ion-card-content>
-    </ion-card>
-
+            <ion-row>
+              <ion-col>
+                <ion-button type="submit" expand="block">Add Expense</ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button color="medium" expand="block" (click)="onCancel()">Cancel</ion-button>
+              </ion-col>
+            </ion-row>
+          </form>
+        </ion-card-content>
+      </ion-card>
+    </div>
     <!-- add group -->
+
+    <!-- expense list -->
+        <ul style="list-style: none;">
+          <li *ngFor="let exp of expenses">
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>
+                  {{ exp.amount }}
+                  <span style="float: right;">
+                    <ion-button color=danger (click)="deleteExpense(exp.date)"><ion-icon name="trash-outline"></ion-icon></ion-button>
+                  </span>
+                </ion-card-title>
+                <ion-card-subtitle>
+                  {{exp.description}}
+                </ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </li>
+        </ul>
+      <!-- expense list -->
   </ion-content>
 </div>
