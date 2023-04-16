@@ -17,4 +17,41 @@
       </ion-list>
     </ion-card-content>
   </ion-card>
+
+  <div style="display: flex; justify-content: center; text-align: center; margin-top: 50px;">
+    <ion-button shape="round" (click)="handleNewEventsButton()">Add a New Event</ion-button>
+  </div>
+  <div *ngIf="addNewEvent">
+    <form [formGroup]="eventForm">
+      <ion-item>
+        <ion-label position="floating">Event Name</ion-label>
+        <ion-input formControlName="eventName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Amount</ion-label>
+        <ion-input formControlName="amount"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Paid By</ion-label>
+        <ion-input type="email" formControlName="paidBy" placeholder="Enter member's email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Date</ion-label>
+        <ion-datetime formControlName="date" display-format="MMM DD, YYYY" picker-format="MMM DD YYYY"></ion-datetime>
+      </ion-item>
+      <!-- <ion-item>
+        <ion-label>How would you like to split money?</ion-label>
+        <ion-radio-group formControlName="splitType">
+          <ion-item>
+            <ion-label>Split Equally</ion-label>
+            <ion-radio value="equal"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Pay each </ion-label>
+            <ion-radio value="equal"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-item> -->
+    </form>
+  </div>
 </ion-content>

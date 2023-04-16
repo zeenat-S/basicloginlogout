@@ -3,6 +3,7 @@ import { Groups } from '../model/groups';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthenticationService } from '../services/authentication.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-group-details',
@@ -12,6 +13,14 @@ import { AuthenticationService } from '../services/authentication.service';
 export class GroupDetailsPage implements OnInit {
 
   group!: Groups;
+  addNewEvent = false;
+  eventForm = new FormGroup({
+    eventName: new FormControl('', [Validators.required]),
+    paidBy: new FormControl('', [Validators.required, Validators.email]),
+    amount: new FormControl(0, [Validators.required, Validators.min(1)]),
+    date: new FormControl('', Validators.required),
+    // splitType: new FormControl('', Validators.required)
+  })
 
   constructor(private activatedRoute: ActivatedRoute, private firestore: AngularFirestore, private auth: AuthenticationService) {
     this.activatedRoute.params.subscribe(params => {
@@ -42,6 +51,14 @@ export class GroupDetailsPage implements OnInit {
     })
     
     
+  }
+
+  handleNewEventsButton(){
+    this.addNewEvent= true;
+  }
+
+  onCancel() {
+    this.addNewEvent = false;
   }
 
 }

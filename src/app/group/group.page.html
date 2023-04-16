@@ -32,7 +32,7 @@
 
   <ion-content>
     <div style="display: flex; justify-content: center; text-align: center; margin-top: 50px;">
-      <ion-button (click)="handleNewGroup()">New Group</ion-button>
+      <ion-button shape="round" (click)="handleNewGroup()">New Group</ion-button>
     </div>
     <div *ngIf="addGroup" style="display: flex; justify-content: center;">
       <form [formGroup]="groupForm" style="width: 75%;">
