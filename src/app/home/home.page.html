@@ -14,7 +14,9 @@
 
   </ion-header>
   <ion-content class="ion-padding">
-    <ion-button style="float: right;" (click)="logout()">Logout</ion-button>
+    <ion-button color="light" expand="block" routerLink="/home">Profile</ion-button>
+    <ion-button color="light" expand="block" routerLink="/group">My Groups</ion-button>
+    <ion-button expand="block" (click)="logout()">Logout</ion-button>
   </ion-content>
 </ion-menu>
 <div class="ion-page" id="main-content">

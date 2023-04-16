@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Group Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="group">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{group.groupName}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let member of group.members">
+          {{member.name}}
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
