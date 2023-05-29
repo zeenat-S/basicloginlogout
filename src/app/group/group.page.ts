@@ -118,7 +118,9 @@ export class GroupPage implements OnInit {
     const user = document?.data() as User;
     const name = user.userName
     // console.log(user)
-    this.members.push({ email: email, name: name });
+    if(!this.members.includes({ email: email, name: name })){
+      this.members.push({ email: email, name: name });
+    }
     console.log("member added: " + email + " " + name);
   }
 

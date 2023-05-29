@@ -1,11 +1,12 @@
 import { User } from "./user";
 
 export interface Events {
-    id?: string;
-    eventName: string
-    amount: number;
-    paidBy: User
+    id?: string | null | undefined;
+    eventName: string | null | undefined
+    amount: number 
+    paidBy: string | null | undefined
     eventMembers: Array<User>
-    date: Date
+    date: string
+    splitMoney: string
     // splitType: string
 }

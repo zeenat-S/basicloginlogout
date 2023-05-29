@@ -65,14 +65,19 @@ export class HomePage {
   }
 
   async onSubmit() {
+    const date = new Date(String(this.expenseForm.value.date));
+    const dateDay = date.getDate();
+    const dateMonth = date.getMonth();
+    const dateYear = date.getFullYear();
     const expense: Expense = {
       id: String(this.expenses.length),
       description: String(this.expenseForm.value.description),
       amount: Number(this.expenseForm.value.amount),
-      date: new Date(String(this.expenseForm.value.date)),
+      date: String(dateDay)+"/"+String(dateMonth)+"/"+String(dateYear),
       userId: String(this.auth.getCurrentUserID())
     }
 
+    
     this.auth.getCurrentUserEmail().then((async email => {
       const query = await this.firestore.collection('users', ref => ref.where('userEmail', '==', email)).get().toPromise();
       if (query?.empty) {
@@ -85,6 +90,7 @@ export class HomePage {
       const expRef = this.firestore.collection('users').doc(docId).collection('expense');
       expRef.add(expense).then(() => console.log("expense added : " + expense.description))
     }))
+    console.log(expense.description+ " "+expense.date);
     this.showExpenseForm = false;
     this.expenseForm.reset();
   }

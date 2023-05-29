@@ -14,7 +14,7 @@
 
   </ion-header>
   <ion-content class="ion-padding">
-    <ion-button color="light" expand="block" routerLink="/home">Profile</ion-button>
+    <ion-button color="light" expand="block" routerLink="/profile">Profile</ion-button>
     <ion-button color="light" expand="block" routerLink="/group">My Groups</ion-button>
     <ion-button expand="block" (click)="logout()">Logout</ion-button>
   </ion-content>
@@ -96,7 +96,7 @@
                   </span>
                 </ion-card-title>
                 <ion-card-subtitle>
-                  {{exp.description}}
+                  {{exp.description}} | {{exp.date}}
                 </ion-card-subtitle>
               </ion-card-header>
             </ion-card>

@@ -1,0 +1,37 @@
+<ion-menu contentId="main-content">
+  <ion-header>
+
+    <ion-toolbar>
+      <div style="display: flex; justify-content: space-around; align-items: center;">
+        {{user}}
+        <div>
+          <ion-avatar style="font-size: small;">
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+        </div>
+      </div>
+    </ion-toolbar>
+
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-button color="light" expand="block" routerLink="/home">Daily Expenses</ion-button>
+    <ion-button color="light" expand="block" routerLink="/profile">Profile</ion-button>
+    <ion-button color="light" expand="block" routerLink="/group">My Groups</ion-button>
+    <ion-button expand="block" (click)="logout()">Logout</ion-button>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Profile</ion-title>
+      <ion-buttons slot="end">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <div id="chart"></div>
+  </ion-content>
+</div>
